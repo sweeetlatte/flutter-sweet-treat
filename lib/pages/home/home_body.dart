@@ -7,7 +7,7 @@ class HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: const EdgeInsets.all(18),
+      padding: EdgeInsets.fromLTRB(18, 10, 18, 18),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 18,

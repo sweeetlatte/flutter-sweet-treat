@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sweettreat/config/const.dart';
 import 'package:sweettreat/pages/favorites/favorites_body.dart';
 import 'package:sweettreat/pages/home/home_body.dart';
+import 'package:sweettreat/pages/home/widgets/category.dart';
 import 'package:sweettreat/pages/seen/seen_body.dart';
 
 class MyApp extends StatefulWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -14,7 +15,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    HomeBody(),
+    // HomeBody(),
+    CategoryPage(),
     FavoritesBody(),
     SeenBody(),
   ];
@@ -30,6 +32,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 60,
         title: const Text(
           'Sweet Treat',
           style: TextStyle(
