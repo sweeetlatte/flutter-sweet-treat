@@ -16,9 +16,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    // HomeBody(),
+    HomeBody(),
     // CategoryPage(),
-    ProductDetail(),
+    // ProductDetail(),
     FavoritesBody(),
     SeenBody(),
   ];
