@@ -5,8 +5,6 @@ const stPrimaryVariant = Color(0xff773b33);
 const stBackground = Color(0xffFFFBFB);
 const stNeutral1 = Colors.white;
 
-const stBackgroundwOpacity = Color.fromRGBO(255, 251, 251, 0);
-
 const sizeIconButton = 24.0;
 
 const styleTitleBlack =

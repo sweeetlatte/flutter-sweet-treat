@@ -3,6 +3,7 @@ import 'package:sweettreat/config/const.dart';
 import 'package:sweettreat/pages/favorites/favorites_body.dart';
 import 'package:sweettreat/pages/home/home_body.dart';
 import 'package:sweettreat/pages/home/widgets/category.dart';
+import 'package:sweettreat/pages/home/widgets/product.dart';
 import 'package:sweettreat/pages/seen/seen_body.dart';
 
 class MyApp extends StatefulWidget {
@@ -16,7 +17,8 @@ class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     // HomeBody(),
-    CategoryPage(),
+    // CategoryPage(),
+    ProductDetail(),
     FavoritesBody(),
     SeenBody(),
   ];

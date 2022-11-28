@@ -31,7 +31,6 @@ class CategoryPage extends StatelessWidget {
                 alignment: Alignment.center,
                 color: stPrimaryVariant,
                 child: GridTileBar(
-                  backgroundColor: stBackgroundwOpacity,
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
