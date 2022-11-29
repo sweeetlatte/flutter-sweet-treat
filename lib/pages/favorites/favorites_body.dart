@@ -42,7 +42,7 @@ class FavoritesBody extends StatelessWidget {
                   image: const DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage(
-                        'assets/images/chocolate-strawberry-shortcake.webp'),
+                        'assets/images/product/chocolate-strawberry-shortcake.webp'),
                   ),
                 )),
               ),

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "c1",
+    "name": "Cakes",
+    "image": "assets/images/category/cake.jpg"
+  },
+  {
+    "id": "c2",
+    "name": "Cookies",
+    "image": "assets/images/category/cake.jpg"
+  },
+  {
+    "id": "c3",
+    "name": "Pies",
+    "image": "assets/images/category/cake.jpg"
+  },
+  {
+    "id": "c4",
+    "name": "Pastries",
+    "image": "assets/images/category/cake.jpg"
+  },
+  {
+    "id": "c5",
+    "name": "Candies",
+    "image": "assets/images/category/cake.jpg"
+  },
+  {
+    "id": "c6",
+    "name": "Puddings",
+    "image": "assets/images/category/cake.jpg"
+  },
+  {
+    "id": "c7",
+    "name": "Ice creams",
+    "image": "assets/images/category/cake.jpg"
+  },
+  {
+    "id": "c8",
+    "name": "Fruits",
+    "image": "assets/images/category/cake.jpg"
+  }
+]

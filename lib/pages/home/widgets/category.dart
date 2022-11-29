@@ -3,16 +3,23 @@ import 'package:sweettreat/config/const.dart';
 import 'package:sweettreat/pages/home/widgets/product.dart';
 
 class CategoryPage extends StatelessWidget {
-  const CategoryPage({super.key});
+  static const routeName = '/category';
+  const CategoryPage({
+    Key? key,
+    // required this.title,
+  }) : super(key: key);
+
+  // final title;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60,
-        title: const Text(
-          'Sweet Treat',
-          style: TextStyle(
+        title: Text(
+          // 'Category $title',
+          'Category',
+          style: const TextStyle(
               color: stPrimary,
               fontWeight: FontWeight.w400,
               fontSize: 20,
@@ -43,7 +50,6 @@ class CategoryPage extends StatelessWidget {
               return Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(9),
-                  color: stPrimary,
                 ),
                 width: double.infinity,
                 height: 200,
@@ -101,7 +107,7 @@ class CategoryPage extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(9),
                     child: Image.asset(
-                      'assets/images/chocolate-strawberry-shortcake.webp',
+                      'assets/images/product/chocolate-strawberry-shortcake.webp',
                       fit: BoxFit.cover,
                     ),
                   ),

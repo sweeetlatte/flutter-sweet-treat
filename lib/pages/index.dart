@@ -7,6 +7,7 @@ import 'package:sweettreat/pages/home/widgets/product.dart';
 import 'package:sweettreat/pages/seen/seen_body.dart';
 
 class MyApp extends StatefulWidget {
+  static const routeName = '/';
   const MyApp({super.key});
 
   @override

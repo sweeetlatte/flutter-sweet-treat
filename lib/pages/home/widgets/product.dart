@@ -31,7 +31,7 @@ class ProductDetail extends StatelessWidget {
               decoration: const BoxDecoration(
                   image: DecorationImage(
                 image: AssetImage(
-                    'assets/images/chocolate-strawberry-shortcake.webp'),
+                    'assets/images/product/chocolate-strawberry-shortcake.webp'),
                 fit: BoxFit.cover,
               )),
               child: Row(

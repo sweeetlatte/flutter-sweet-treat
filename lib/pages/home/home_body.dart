@@ -8,7 +8,7 @@ class HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: EdgeInsets.fromLTRB(18, 10, 18, 18),
+      padding: EdgeInsets.fromLTRB(18, 10, 18, 0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 18,
@@ -17,8 +17,15 @@ class HomeBody extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: ((_) => const CategoryPage())));
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: ((_) => CategoryPage(title: index))));
+            Navigator.pushNamed(
+              context,
+              CategoryPage.routeName,
+              arguments: {"title": index},
+            );
           },
           child: Column(
             children: [
@@ -32,7 +39,7 @@ class HomeBody extends StatelessWidget {
                       image: const DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage(
-                            'assets/images/chocolate-strawberry-shortcake.webp'),
+                            'assets/images/product/chocolate-strawberry-shortcake.webp'),
                       ),
                     ),
                   )),
