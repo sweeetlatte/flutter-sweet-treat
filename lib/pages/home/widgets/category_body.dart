@@ -16,10 +16,10 @@ class CategoryBody extends StatelessWidget {
         borderRadius: BorderRadius.circular(9),
       ),
       width: double.infinity,
-      height: 200,
+      height: 202,
       child: GridTile(
         footer: ClipRRect(
-          borderRadius: const BorderRadius.vertical(bottom: Radius.circular(9)),
+          borderRadius: const BorderRadius.vertical(bottom: Radius.circular(11)),
           child: Container(
             height: 65,
             alignment: Alignment.center,
