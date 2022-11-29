@@ -3,12 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:sweettreat/config/const.dart';
 import 'package:sweettreat/pages/favorites/favorites_body.dart';
 import 'package:sweettreat/pages/home/home_body.dart';
-import 'package:sweettreat/pages/home/widgets/category.dart';
-import 'package:sweettreat/pages/home/widgets/product.dart';
 import 'package:sweettreat/pages/seen/seen_body.dart';
 import 'package:sweettreat/providers/product_provider.dart';
-
-import '../providers/category_provider.dart';
 
 class MyApp extends StatefulWidget {
   static const routeName = '/';
@@ -24,17 +20,14 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     _dataFuture = Provider.of<ProductProvider>(context).readJson();
   }
 
-  static List<Widget> _widgetOptions = <Widget>[
-    HomeBody(),
-    // CategoryPage(),
-    // ProductDetail(),
-    FavoritesBody(),
-    SeenBody(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const HomeBody(),
+    const FavoritesBody(),
+    const SeenBody(),
   ];
 
   void _onItemTapped(int index) {

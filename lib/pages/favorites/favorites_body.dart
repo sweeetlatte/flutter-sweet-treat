@@ -19,6 +19,27 @@ class FavoritesBody extends StatelessWidget {
           return Dismissible(
             onDismissed: (direction) {
               items[index].handleRemoveIsFavorite();
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Removed ${items[index].title}'), backgroundColor: stNeutral2,));
+            },
+            confirmDismiss: (direction) async {
+              return await showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Confirmation'),
+                        content: const Text(
+                            'Reomve this item from your favorite list?'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, false),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, true),
+                            child: const Text('Yes'),
+                          ),
+                        ],
+                      ));
             },
             key: ValueKey<int>(index),
             child: Container(

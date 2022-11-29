@@ -4,17 +4,22 @@ import 'package:sweettreat/config/const.dart';
 import 'package:sweettreat/models/product.dart';
 import 'package:sweettreat/pages/home/widgets/category_body.dart';
 import 'package:sweettreat/pages/home/widgets/product.dart';
-import 'package:sweettreat/providers/category_provider.dart';
 import 'package:sweettreat/providers/product_provider.dart';
 
-class CategoryPage extends StatelessWidget {
+class CategoryPage extends StatefulWidget {
   static const routeName = '/category';
   CategoryPage({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<CategoryPage> createState() => _CategoryPageState();
+}
+
+class _CategoryPageState extends State<CategoryPage> {
+  @override
   Widget build(BuildContext context) {
+    bool change = true;
     final data = ModalRoute.of(context)?.settings.arguments as Map;
     var products = Provider.of<ProductProvider>(context)
         .getItemsWithCategoryId(data['categoryId']);
@@ -53,10 +58,14 @@ class CategoryPage extends StatelessWidget {
                     arguments: {
                       'id': products[index].id,
                     });
+                products[index].updateView();
+                setState(() {
+                  change = !change;
+                });
               },
               child: ChangeNotifierProvider<Product>.value(
                 value: products[index],
-                child: CategoryBody(),
+                child: const CategoryBody(),
               ),
             );
           },

@@ -19,7 +19,8 @@ class CategoryBody extends StatelessWidget {
       height: 202,
       child: GridTile(
         footer: ClipRRect(
-          borderRadius: const BorderRadius.vertical(bottom: Radius.circular(11)),
+          borderRadius:
+              const BorderRadius.vertical(bottom: Radius.circular(11)),
           child: Container(
             height: 65,
             alignment: Alignment.center,
@@ -37,8 +38,8 @@ class CategoryBody extends StatelessWidget {
                         style: styleTitleBlack,
                       )),
                   Flexible(
-                      flex: 2,
-                      child: Row(
+                    flex: 2,
+                    child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Padding(
@@ -70,12 +71,19 @@ class CategoryBody extends StatelessWidget {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.remove_red_eye),
-                              Text(product.view),
+                              Consumer<Product>(
+                                  builder: (((context, product, child) {
+                                return Column(
+                                  children: [
+                                    const Icon((Icons.remove_red_eye)),
+                                    Text(product.view),
+                                  ],
+                                );
+                              }))),
                             ],
-                          ),
-                        ],
-                      )),
+                          )
+                        ]),
+                  )
                 ],
               ),
             ),
