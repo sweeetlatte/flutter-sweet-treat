@@ -12,31 +12,31 @@
   {
     "id": "c3",
     "name": "Pies",
-    "image": "assets/images/category/cake.jpg"
+    "image": "assets/images/category/pie.jpg"
   },
   {
     "id": "c4",
     "name": "Pastries",
-    "image": "assets/images/category/cake.jpg"
+    "image": "assets/images/category/pastry.jpg"
   },
   {
     "id": "c5",
     "name": "Candies",
-    "image": "assets/images/category/cake.jpg"
+    "image": "assets/images/category/candy.jpg"
   },
   {
     "id": "c6",
     "name": "Puddings",
-    "image": "assets/images/category/cake.jpg"
+    "image": "assets/images/category/pudding.jpg"
   },
   {
     "id": "c7",
     "name": "Ice creams",
-    "image": "assets/images/category/cake.jpg"
+    "image": "assets/images/category/ice-cream.jpg"
   },
   {
     "id": "c8",
     "name": "Smoothies",
-    "image": "assets/images/category/cake.jpg"
+    "image": "assets/images/category/smoothie.jpg"
   }
 ]
