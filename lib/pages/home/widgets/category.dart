@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sweettreat/config/const.dart';
 import 'package:sweettreat/pages/home/widgets/product.dart';
+import 'package:sweettreat/providers/category_provider.dart';
+import 'package:sweettreat/providers/product_provider.dart';
 
 class CategoryPage extends StatelessWidget {
   static const routeName = '/category';
-  const CategoryPage({
+  CategoryPage({
     Key? key,
-    // required this.title,
   }) : super(key: key);
-
-  // final title;
 
   @override
   Widget build(BuildContext context) {
+    final data = ModalRoute.of(context)?.settings.arguments as Map;
+    var products = Provider.of<ProductProvider>(context)
+        .getItemsWithCategoryId(data['categoryId']);
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60,
         title: Text(
-          // 'Category $title',
-          'Category',
+          data['title'],
           style: const TextStyle(
               color: stPrimary,
               fontWeight: FontWeight.w400,
@@ -31,23 +34,25 @@ class CategoryPage extends StatelessWidget {
         ),
         elevation: 0,
       ),
-      body: InkWell(
-        onTap: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: ((_) => const ProductDetail())));
-        },
-        child: Container(
-          color: stBackground,
-          child: ListView.separated(
-            padding: const EdgeInsets.fromLTRB(18, 10, 18, 18),
-            itemCount: 10,
-            separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(
-                height: 24,
-              );
-            },
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
+      body: Container(
+        color: stBackground,
+        child: ListView.separated(
+          padding: const EdgeInsets.fromLTRB(18, 10, 18, 18),
+          itemCount: products.length,
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(
+              height: 24,
+            );
+          },
+          itemBuilder: (BuildContext context, int index) {
+            return InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, ProductDetail.routeName,
+                    arguments: {
+                      'id': products[index].id,
+                    });
+              },
+              child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(9),
                 ),
@@ -66,10 +71,10 @@ class CategoryPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Flexible(
+                            Flexible(
                                 flex: 4,
                                 child: Text(
-                                  'sing a Flexible widget gives a child of a Row, Column, or Flex the flexibility to expand to fill the available space in the main a',
+                                  products[index].title,
                                   maxLines: 2,
                                   style: styleTitleBlack,
                                 )),
@@ -83,18 +88,18 @@ class CategoryPage extends StatelessWidget {
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
-                                        children: const [
-                                          Icon(Icons.favorite),
-                                          Text('1234'),
+                                        children: [
+                                          const Icon(Icons.favorite),
+                                          Text(products[index].favorite),
                                         ],
                                       ),
                                     ),
                                     Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: const [
-                                        Icon(Icons.remove_red_eye),
-                                        Text('4567'),
+                                      children: [
+                                        const Icon(Icons.remove_red_eye),
+                                        Text(products[index].view),
                                       ],
                                     ),
                                   ],
@@ -107,14 +112,14 @@ class CategoryPage extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(9),
                     child: Image.asset(
-                      'assets/images/product/chocolate-strawberry-shortcake.webp',
+                      products[index].image,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

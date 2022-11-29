@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sweettreat/config/const.dart';
 import 'package:sweettreat/pages/favorites/favorites_body.dart';
 import 'package:sweettreat/pages/home/home_body.dart';
 import 'package:sweettreat/pages/home/widgets/category.dart';
 import 'package:sweettreat/pages/home/widgets/product.dart';
 import 'package:sweettreat/pages/seen/seen_body.dart';
+import 'package:sweettreat/providers/product_provider.dart';
+
+import '../providers/category_provider.dart';
 
 class MyApp extends StatefulWidget {
   static const routeName = '/';
@@ -16,7 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     HomeBody(),
     // CategoryPage(),
     // ProductDetail(),
@@ -33,45 +37,54 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 60,
-        title: const Text(
-          'Sweet Treat',
-          style: TextStyle(
-              color: stPrimary,
-              fontWeight: FontWeight.w400,
-              fontSize: 20,
-              letterSpacing: 1),
-        ),
-        backgroundColor: stBackground,
-        elevation: 0,
-      ),
-      body: Container(
-        color: stBackground,
-        child: _widgetOptions[_selectedIndex],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: sizeIconButton,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.cookie_outlined),
-            label: 'Menu',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star_outline_rounded),
-            label: 'Favorites',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.remove_red_eye_outlined),
-            label: 'Seen',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: stPrimary,
-        onTap: _onItemTapped,
-        backgroundColor: stBackground,
-      ),
-    );
+    return FutureBuilder(
+        future: Provider.of<ProductProvider>(context).readJson(),
+        builder: (BuildContext context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+
+          var categoryItem = snapshot.hasData ? snapshot.data : [];
+          return Scaffold(
+            appBar: AppBar(
+              toolbarHeight: 60,
+              title: const Text(
+                'Sweet Treat',
+                style: TextStyle(
+                    color: stPrimary,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                    letterSpacing: 1),
+              ),
+              backgroundColor: stBackground,
+              elevation: 0,
+            ),
+            body: Container(
+              color: stBackground,
+              child: _widgetOptions[_selectedIndex],
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              iconSize: sizeIconButton,
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.cookie_outlined),
+                  label: 'Menu',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.star_outline_rounded),
+                  label: 'Favorites',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.remove_red_eye_outlined),
+                  label: 'Seen',
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              selectedItemColor: stPrimary,
+              onTap: _onItemTapped,
+              backgroundColor: stBackground,
+            ),
+          );
+        });
   }
 }

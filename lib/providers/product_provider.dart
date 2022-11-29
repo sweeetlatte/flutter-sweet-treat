@@ -4,10 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:sweettreat/models/product.dart';
 
-class CategoryProvider extends ChangeNotifier {
+class ProductProvider extends ChangeNotifier {
   List<Product> _items = [];
 
   List<Product> get items => [...items];
+
+  List<Product> getItemsWithCategoryId(categoryId) {
+    return _items.where((element) => element.categoryId == categoryId).toList();
+  }
 
   Future<List<Product>> readJson() async {
     final String response =

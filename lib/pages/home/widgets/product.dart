@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sweettreat/config/const.dart';
+
+import '../../../providers/product_provider.dart';
 
 class ProductDetail extends StatelessWidget {
   const ProductDetail({super.key});
+  static const routeName = '/product';
 
   @override
   Widget build(BuildContext context) {
+    final arguments = ModalRoute.of(context)?.settings.arguments as Map;
+    var products = Provider.of<ProductProvider>(context)
+        .getItemsWithCategoryId(arguments['categoryId']);
+
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 60,
-        title: const Text(
-          'Sweet Treat',
-          style: TextStyle(
-              color: stPrimary,
-              fontWeight: FontWeight.w400,
-              fontSize: 20,
-              letterSpacing: 1),
-        ),
-        backgroundColor: stBackground,
-        iconTheme: const IconThemeData(
-          color: stPrimary,
-        ),
-        elevation: 0,
-      ),
       body: Column(
         children: [
           Expanded(
@@ -34,52 +26,75 @@ class ProductDetail extends StatelessWidget {
                     'assets/images/product/chocolate-strawberry-shortcake.webp'),
                 fit: BoxFit.cover,
               )),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Container(
-                    width: 85,
-                    height: 36,
-                    decoration: const BoxDecoration(
-                      borderRadius:
-                          BorderRadius.only(topRight: Radius.circular(9)),
-                      color: stBackground,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.favorite,
+              child: Stack(alignment: Alignment.bottomCenter, children: [
+                Positioned(
+                    top: 75,
+                    left: 10,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            color: stBackground,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(999))),
+                        child: Icon(
+                          Icons.keyboard_arrow_left_rounded,
+                          size: 30.0,
                           color: stPrimary,
                         ),
-                        const SizedBox(width: 7),
-                        const Text('1234'),
-                      ],
+                      ),
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: 85,
+                      height: 36,
+                      decoration: const BoxDecoration(
+                        borderRadius:
+                            BorderRadius.only(topRight: Radius.circular(9)),
+                        color: stBackground,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.favorite,
+                            color: stPrimary,
+                          ),
+                          const SizedBox(width: 7),
+                          const Text('1234'),
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: 85,
-                    height: 36,
-                    decoration: const BoxDecoration(
-                      borderRadius:
-                          BorderRadius.only(topLeft: Radius.circular(9)),
-                      color: stBackground,
+                    Container(
+                      width: 85,
+                      height: 36,
+                      decoration: const BoxDecoration(
+                        borderRadius:
+                            BorderRadius.only(topLeft: Radius.circular(9)),
+                        color: stBackground,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.remove_red_eye,
+                            color: stPrimary,
+                          ),
+                          const SizedBox(width: 7),
+                          const Text('1234'),
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.remove_red_eye,
-                          color: stPrimary,
-                        ),
-                        const SizedBox(width: 7),
-                        const Text('1234'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ]),
             ),
           ),
           Expanded(
@@ -88,31 +103,36 @@ class ProductDetail extends StatelessWidget {
               padding: const EdgeInsets.all(18),
               child: Column(
                 children: [
+                  Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.only(bottom: 12),
+                      child: Text(
+                        'Title',
+                        style: TextStyle(color: stPrimary, fontSize: 20),
+                      )),
                   const Text(
-                      'Bake on center rack until custard is set and top has a thin white sugary crust, 25 minutes. Let cool completely before cutting into bars. Dip knife into very hot water, run around the edge, and cut into 16 squares. Dust cookies with 1 teaspoon confectioners sugar.'),
+                    'Bake on center rack until custard is set and top has a thin white sugary crust, 25 minutes. Let cool completely before cutting into bars. Dip knife into very hot water, run around the edge, and cut into 16 squares. Dust cookies with 1 teaspoon confectioners sugar.',
+                    style: TextStyle(fontSize: 14),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
                   Column(
                     children: [
                       Container(
-                        width: 167,
-                        height: 35,
-                        decoration: const BoxDecoration(
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(9)),
-                        ),
-                        alignment: Alignment.center,
-                        child: const Text(
+                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.only(bottom: 6),
+                        child: Text(
                           'Ingredients',
-                          style: styleTitlePrimary,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: stPrimary,
+                          ),
                         ),
                       ),
-                      Container(
-                        width: double.infinity,
-                        color: stPrimaryVariant,
-                        child: const Text(''),
-                      )
+                      Text(
+                        'Bake on center rack until custard is set and top has a thin white sugary crust, 25 minutes. Let cool completely before cutting into bars. Dip knife into very hot water, run around the edge, and cut into 16 squares. Dust cookies with 1 teaspoon confectioners sugar.',
+                      ),
                     ],
                   ),
                   const SizedBox(
@@ -121,23 +141,19 @@ class ProductDetail extends StatelessWidget {
                   Column(
                     children: [
                       Container(
-                        width: 167,
-                        height: 35,
-                        decoration: const BoxDecoration(
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(9)),
-                        ),
-                        alignment: Alignment.center,
-                        child: const Text(
+                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.only(bottom: 6),
+                        child: Text(
                           'Directions',
-                          style: styleTitlePrimary,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: stPrimary,
+                          ),
                         ),
                       ),
-                      Container(
-                        width: double.infinity,
-                        color: stPrimaryVariant,
-                        child: const Text(''),
-                      )
+                      Text(
+                        'Bake on center rack until custard is set and top has a thin white sugary crust, 25 minutes. Let cool completely before cutting into bars. Dip knife into very hot water, run around the edge, and cut into 16 squares. Dust cookies with 1 teaspoon confectioners sugar.',
+                      ),
                     ],
                   ),
                 ],
