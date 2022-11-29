@@ -11,8 +11,8 @@ class ProductDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final arguments = ModalRoute.of(context)?.settings.arguments as Map;
-    var products = Provider.of<ProductProvider>(context)
-        .getItemsWithCategoryId(arguments['categoryId']);
+    var product =
+        Provider.of<ProductProvider>(context).getItemWithId(arguments['id']);
 
     return Scaffold(
       body: Column(
@@ -20,81 +20,84 @@ class ProductDetail extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   image: DecorationImage(
-                image: AssetImage(
-                    'assets/images/product/chocolate-strawberry-shortcake.webp'),
+                image: AssetImage(product.image),
                 fit: BoxFit.cover,
               )),
-              child: Stack(alignment: Alignment.bottomCenter, children: [
-                Positioned(
-                    top: 75,
-                    left: 10,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Positioned(
+                      top: 75,
+                      left: 10,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: const BoxDecoration(
                             color: stBackground,
                             borderRadius:
-                                BorderRadius.all(Radius.circular(999))),
-                        child: Icon(
-                          Icons.keyboard_arrow_left_rounded,
-                          size: 30.0,
-                          color: stPrimary,
+                                BorderRadius.all(Radius.circular(999)),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_back_rounded,
+                            size: 30.0,
+                            color: stPrimary,
+                          ),
+                        ),
+                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        width: 85,
+                        height: 36,
+                        decoration: const BoxDecoration(
+                          borderRadius:
+                              BorderRadius.only(topRight: Radius.circular(9)),
+                          color: stBackground,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.favorite,
+                              color: stPrimary,
+                            ),
+                            const SizedBox(width: 7),
+                            Text(product.favorite),
+                          ],
                         ),
                       ),
-                    )),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Container(
-                      width: 85,
-                      height: 36,
-                      decoration: const BoxDecoration(
-                        borderRadius:
-                            BorderRadius.only(topRight: Radius.circular(9)),
-                        color: stBackground,
+                      Container(
+                        width: 85,
+                        height: 36,
+                        decoration: const BoxDecoration(
+                          borderRadius:
+                              BorderRadius.only(topLeft: Radius.circular(9)),
+                          color: stBackground,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.remove_red_eye,
+                              color: stPrimary,
+                            ),
+                            const SizedBox(width: 7),
+                            Text(product.view),
+                          ],
+                        ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.favorite,
-                            color: stPrimary,
-                          ),
-                          const SizedBox(width: 7),
-                          const Text('1234'),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: 85,
-                      height: 36,
-                      decoration: const BoxDecoration(
-                        borderRadius:
-                            BorderRadius.only(topLeft: Radius.circular(9)),
-                        color: stBackground,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.remove_red_eye,
-                            color: stPrimary,
-                          ),
-                          const SizedBox(width: 7),
-                          const Text('1234'),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ]),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
@@ -105,24 +108,22 @@ class ProductDetail extends StatelessWidget {
                 children: [
                   Container(
                       alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.only(bottom: 12),
+                      padding: const EdgeInsets.only(bottom: 12),
                       child: Text(
-                        'Title',
-                        style: TextStyle(color: stPrimary, fontSize: 20),
+                        product.title,
+                        style: const TextStyle(color: stPrimary, fontSize: 20),
                       )),
-                  const Text(
-                    'Bake on center rack until custard is set and top has a thin white sugary crust, 25 minutes. Let cool completely before cutting into bars. Dip knife into very hot water, run around the edge, and cut into 16 squares. Dust cookies with 1 teaspoon confectioners sugar.',
-                    style: TextStyle(fontSize: 14),
+                  Text(
+                    product.intro,
+                    style: const TextStyle(fontSize: 14),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   Column(
                     children: [
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(bottom: 6),
-                        child: Text(
+                        padding: const EdgeInsets.only(bottom: 6),
+                        child: const Text(
                           'Ingredients',
                           style: TextStyle(
                             fontSize: 16,
@@ -130,20 +131,19 @@ class ProductDetail extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text(
-                        'Bake on center rack until custard is set and top has a thin white sugary crust, 25 minutes. Let cool completely before cutting into bars. Dip knife into very hot water, run around the edge, and cut into 16 squares. Dust cookies with 1 teaspoon confectioners sugar.',
-                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(product.ingredients),
+                      )
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   Column(
                     children: [
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(bottom: 6),
-                        child: Text(
+                        padding: const EdgeInsets.only(bottom: 6),
+                        child: const Text(
                           'Directions',
                           style: TextStyle(
                             fontSize: 16,
@@ -151,9 +151,10 @@ class ProductDetail extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text(
-                        'Bake on center rack until custard is set and top has a thin white sugary crust, 25 minutes. Let cool completely before cutting into bars. Dip knife into very hot water, run around the edge, and cut into 16 squares. Dust cookies with 1 teaspoon confectioners sugar.',
-                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(product.instructions),
+                      )
                     ],
                   ),
                 ],
