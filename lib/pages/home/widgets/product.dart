@@ -4,12 +4,18 @@ import 'package:sweettreat/config/const.dart';
 
 import '../../../providers/product_provider.dart';
 
-class ProductDetail extends StatelessWidget {
+class ProductDetail extends StatefulWidget {
   const ProductDetail({super.key});
   static const routeName = '/product';
 
   @override
+  State<ProductDetail> createState() => _ProductDetailState();
+}
+
+class _ProductDetailState extends State<ProductDetail> {
+  @override
   Widget build(BuildContext context) {
+    bool change = true;
     final arguments = ModalRoute.of(context)?.settings.arguments as Map;
     var product =
         Provider.of<ProductProvider>(context).getItemWithId(arguments['id']);
@@ -29,27 +35,27 @@ class ProductDetail extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 children: [
                   Positioned(
-                      top: 75,
-                      left: 10,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const BoxDecoration(
-                            color: stBackground,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(999)),
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back_rounded,
-                            size: 30.0,
-                            color: stPrimary,
-                          ),
+                    top: 75,
+                    left: 10,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: const BoxDecoration(
+                          color: stBackground,
+                          borderRadius: BorderRadius.all(Radius.circular(999)),
                         ),
-                      )),
+                        child: const Icon(
+                          Icons.arrow_back_rounded,
+                          size: 30.0,
+                          color: stPrimary,
+                        ),
+                      ),
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -65,9 +71,18 @@ class ProductDetail extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(
-                              Icons.favorite,
-                              color: stPrimary,
+                            InkWell(
+                              onTap: () {
+                                product.toggleIsFavorite();
+                                setState(() {
+                                  change = !change;
+                                });
+                              },
+                              child: Icon(
+                                Icons.favorite,
+                                color:
+                                    product.isFavorite ? stPrimary : stNeutral2,
+                              ),
                             ),
                             const SizedBox(width: 7),
                             Text(product.favorite),
