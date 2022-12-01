@@ -22,9 +22,9 @@ void main() {
       debugShowCheckedModeBanner: false,
       initialRoute: MyApp.routeName,
       routes: {
-        MyApp.routeName: (context) => MyApp(),
-        CategoryPage.routeName: (context) => CategoryPage(),
-        ProductDetail.routeName: (context) => ProductDetail(),
+        MyApp.routeName: (context) => const MyApp(),
+        CategoryPage.routeName: (context) => const CategoryPage(),
+        ProductDetail.routeName: (context) => const ProductDetail(),
       },
     ),
   ));

@@ -123,14 +123,17 @@ class _ProductDetailState extends State<ProductDetail> {
                 children: [
                   Container(
                       alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.only(bottom: 12),
+                      padding: const EdgeInsets.only(bottom: 9),
                       child: Text(
                         product.title,
                         style: const TextStyle(color: stPrimary, fontSize: 20),
                       )),
                   Text(
                     product.intro,
-                    style: const TextStyle(fontSize: 14),
+                    style: TextStyle(
+                      fontSize: 12,
+                      height: 1.5,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Column(
@@ -148,7 +151,13 @@ class _ProductDetailState extends State<ProductDetail> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        child: Text(product.ingredients),
+                        child: Text(
+                          product.ingredients,
+                          style: TextStyle(
+                            fontSize: 12,
+                            height: 1.5,
+                          ),
+                        ),
                       )
                     ],
                   ),
@@ -168,7 +177,13 @@ class _ProductDetailState extends State<ProductDetail> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        child: Text(product.instructions),
+                        child: Text(
+                          product.instructions,
+                          style: TextStyle(
+                            fontSize: 12,
+                            height: 1.5,
+                          ),
+                        ),
                       )
                     ],
                   ),

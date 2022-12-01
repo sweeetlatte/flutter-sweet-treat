@@ -8,7 +8,7 @@ import 'package:sweettreat/providers/product_provider.dart';
 
 class CategoryPage extends StatefulWidget {
   static const routeName = '/category';
-  CategoryPage({
+  const CategoryPage({
     Key? key,
   }) : super(key: key);
 

@@ -46,7 +46,6 @@ class _MyAppState extends State<MyApp> {
             return const CircularProgressIndicator();
           }
 
-          var categoryItem = snapshot.hasData ? snapshot.data : [];
           return Scaffold(
             appBar: AppBar(
               toolbarHeight: 60,
